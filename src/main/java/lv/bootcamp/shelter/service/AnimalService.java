@@ -10,6 +10,8 @@ import lv.bootcamp.shelter.model.AnimalStatus;
 import lv.bootcamp.shelter.model.AnimalType;
 import lv.bootcamp.shelter.repository.AnimalRepository;
 import org.springframework.stereotype.Service;
+import lv.bootcamp.shelter.service.AnimalService;
+import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -23,6 +25,7 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class AnimalService {
+
 
     private static final String IMAGES_BASE_PATH = "/images/";
     private static final String ANIMAL_IMAGES_PATH = IMAGES_BASE_PATH + "animals/";
