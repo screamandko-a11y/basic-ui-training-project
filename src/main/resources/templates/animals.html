@@ -52,9 +52,9 @@
 <body>
 
 <nav>
-  <a href="/">Home</a>
-  <a href="/animals">All animals</a>
-  <a href="/animals#add-animal">Add animal</a>
+  <a th:href="@{/}">Home</a>
+  <a th:href="@{/animals}">All animals</a>
+  <a th:href="@{/animals/new}">Add animal</a>
 </nav>
 
 <main>
@@ -98,69 +98,6 @@
         </div>
       </li>
     </ul>
-  </section>
-
-  <section id="add-animal" aria-label="Add new animal">
-    <h2>Add a new animal</h2>
-
-    <form th:action="@{/animals}"
-          th:object="${form}"
-          method="post">
-
-      <label for="name">Name</label>
-      <input id="name"
-             th:field="*{name}"
-             type="text"
-             required
-             placeholder="e.g. Milo">
-
-      <p class="error"
-         th:if="${#fields.hasErrors('name')}"
-         th:errors="*{name}"></p>
-
-      <label for="type">Type</label>
-      <select id="type" th:field="*{type}" required>
-        <option value="">— choose —</option>
-        <option value="CAT">Cat</option>
-        <option value="DOG">Dog</option>
-        <option value="OTHER">Other</option>
-      </select>
-
-      <p class="error"
-         th:if="${#fields.hasErrors('type')}"
-         th:errors="*{type}"></p>
-
-      <label for="breed">Breed</label>
-      <input id="breed"
-             th:field="*{breed}"
-             type="text"
-             placeholder="e.g. Siamese">
-
-      <label for="age">Age (years)</label>
-      <input id="age"
-             th:field="*{age}"
-             type="number"
-             min="0"
-             placeholder="e.g. 3">
-
-      <p class="error"
-         th:if="${#fields.hasErrors('age')}"
-         th:errors="*{age}"></p>
-
-      <label for="description">Description</label>
-      <textarea id="description"
-                th:field="*{description}"
-                rows="3"
-                placeholder="A short description of the animal's personality"></textarea>
-
-      <label for="imageUrl">Image filename or URL</label>
-      <input id="imageUrl"
-             th:field="*{imageUrl}"
-             type="text"
-             placeholder="Luna.jpeg">
-
-      <button type="submit">Add animal</button>
-    </form>
   </section>
 </main>
 

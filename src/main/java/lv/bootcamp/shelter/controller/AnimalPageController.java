@@ -26,25 +26,27 @@ public class AnimalPageController {
 
     @GetMapping("/animals")
     public String listAnimals(Model model) {
+        model.addAttribute("animals", animalService.findAll());
+        return "animals";
+    }
+
+    @GetMapping("/animals/new")
+    public String newAnimalForm(Model model) {
         model.addAttribute("form",
                 new AnimalForm(null, null, null, null, null, null));
 
-        model.addAttribute("animals", animalService.findAll());
-        return "animals";
+        return "animals-new";
     }
 
     @PostMapping("/animals")
     public String createAnimal(
             @Valid @ModelAttribute("form") AnimalForm form,
-            BindingResult bindingResult,
-            Model model
-    ) {
+            BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            model.addAttribute("animals", animalService.findAll());
-            return "animals";
-        }
+            return "animals-new";}
 
         animalService.createFromForm(form);
         return "redirect:/animals";
+
     }
 }
