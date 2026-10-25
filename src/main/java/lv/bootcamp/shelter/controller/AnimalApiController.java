@@ -3,6 +3,7 @@ package lv.bootcamp.shelter.controller;
 import jakarta.validation.Valid;
 import lv.bootcamp.shelter.dto.AnimalCreateRequest;
 import lv.bootcamp.shelter.dto.AnimalResponse;
+import lv.bootcamp.shelter.dto.ApiErrorResponse;
 import lv.bootcamp.shelter.service.AnimalService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -105,7 +106,12 @@ public class AnimalApiController {
     )
     @ApiResponse(
             responseCode = "400",
-            description = "Invalid request data")
+            description = "Invalid request data",
+            content = @Content(
+            mediaType = "application/json",
+            schema =  @Schema(implementation = ApiErrorResponse.class)
+            )
+    )
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public AnimalResponse create(@RequestBody @Valid AnimalCreateRequest request) {
