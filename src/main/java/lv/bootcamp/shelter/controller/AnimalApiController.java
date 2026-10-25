@@ -21,6 +21,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.Parameter;
 
 import java.util.List;
 
@@ -70,9 +71,13 @@ public class AnimalApiController {
 
     // Finds an animal by its ID.
     // Returns 200 if the animal exists, or 404 if it is not found
-    // In my browser, I could only see the response code in the console (F12)
     @GetMapping("/{id}")
-    public ResponseEntity<AnimalResponse> findById(@PathVariable Long id) {
+    public ResponseEntity<AnimalResponse> findById(
+            @Parameter(
+                    description = "ID of the animal to find",
+                    example = "1")
+            @PathVariable Long id) {
+
         return animalService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -140,7 +145,9 @@ public class AnimalApiController {
                     schema = @Schema(type = "string"))
     )
     @PostMapping("/{id}/adopt")
-    public ResponseEntity<AnimalResponse> adopt(@PathVariable Long id) {
+    public ResponseEntity<AnimalResponse> adopt(@Parameter(
+            description = "ID of the animal to adopt",
+            example = "1") @PathVariable Long id) {
         return animalService.adopt(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
